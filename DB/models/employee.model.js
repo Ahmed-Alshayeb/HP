@@ -1,7 +1,6 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import { sequelize } from "../connection.js";
 import { systemRoles } from "../../src/utils/systemRoles.js";
-import callModel from "./call.model.js";
 
 const employeeModel = sequelize.define("Employee", {
   name: {

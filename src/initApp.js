@@ -1,6 +1,6 @@
 import dotEnv from "dotenv";
-import connectionDB from "../DB/connection.js";
 import * as routes from "./modules/index.routes.js";
+import connection from "../DB/connection.js";
 
 export const initApp = async (express, app) => {
   dotEnv.config();
@@ -8,7 +8,8 @@ export const initApp = async (express, app) => {
   const port = +process.env.PORT || 8000;
 
   app.use(express.json());
-  connectionDB();
+
+  connection();
 
   app.use("/api/v1/employee", routes.employeeRouter);
   app.use("/api/v1/patient", routes.patientRouter);

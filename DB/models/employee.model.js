@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../connection.js";
+
 import { systemRoles } from "../../src/utils/systemRoles.js";
 
 const employeeModel = sequelize.define("Employee", {

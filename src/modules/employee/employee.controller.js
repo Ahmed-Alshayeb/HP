@@ -10,7 +10,8 @@ import AppError from "../../utils/AppError.js";
 // @access  Public
 export const getEmployees = asyncHandler(async (req, res, next) => {
   const employees = await employeeModel.findAll();
-  res.status(200).json({ msg: "success", employees });
+  res.status(200).json({ msg: "success", employees });  
+  
 });
 
 // @desc    create employee

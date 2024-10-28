@@ -44,10 +44,10 @@ export const createCall = asyncHandler(async (req, res, next) => {
 // @desc    get all calls for doctor
 // @route   GET /api/v1/call/doctorCalls
 // @access  Private
-export const doctorCalls = asyncHandler(async (req, res, next) => {
-  const calls = await callModel.findAll({ where: { doctor: req.employee.id } });
-  res.status(201).json({ msg: "success", calls });
-});
+export const doctorCalls = async (req, res, next) => {
+  const calls = await callModel.findAll({ where: { doctor: req.params.DoctorId } });
+  res.status(200).json({ msg: "success", calls });
+};
 
 // @desc    get all calls for doctor
 // @route   GET /api/v1/call/doctorCalls

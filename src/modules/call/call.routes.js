@@ -21,7 +21,7 @@ callRouter.post(
 );
 
 callRouter.get(
-  "/doctorCalls",
+  "/doctorCalls/:DoctorId",
   auth([systemRoles.Doctor]),
   CC.doctorCalls
 );

@@ -26,13 +26,6 @@ export const loginValidation = {
   }),
 };
 
-export const getProfileValidation = {
-  headers: generalFiled.headers.required(),
-};
-
-export const getDoctorsValidation = {
-  headers: generalFiled.headers.required(),
-};
 
 export const updateEmployeeValidation = {
   body: joi
@@ -47,5 +40,4 @@ export const updateEmployeeValidation = {
       status: joi.string().valid("married", "single"),
     })
     .optional(),
-  headers: generalFiled.headers.required(),
 };

@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import mysql2 from "mysql2";
 
 export const sequelize = new Sequelize({
   host: "bs1xtjqlwenxhebtxbtx-mysql.services.clever-cloud.com",
@@ -7,7 +8,11 @@ export const sequelize = new Sequelize({
   password: "idqqcGwzVqLVxVlwpLSk",
   database: "bs1xtjqlwenxhebtxbtx",
   dialect: "mysql",
+  dialectModule: mysql2,
+  
 });
+
+
 
 const connectionDB = async () => {
   await sequelize

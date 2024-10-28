@@ -10,17 +10,13 @@ export const createCallValidation = {
     doctor: joi.number().required(),
     cDescription: joi.string().required(),
   }),
-  headers: generalFiled.headers.required(),
-};
-
-export const doctorCallsValidation = {
-  headers: generalFiled.headers.required(),
 };
 
 export const updateCallStatusValidation = {
   body: joi.object({
-    status: joi.string().valid(...Object.values(statusCall)).required(),
+    status: joi
+      .string()
+      .valid(...Object.values(statusCall))
+      .required(),
   }),
-  headers: generalFiled.headers.required(),
 };
-

@@ -23,7 +23,6 @@ callRouter.post(
 callRouter.get(
   "/doctorCalls",
   auth([systemRoles.Doctor]),
-  validation(CV.doctorCallsValidation),
   CC.doctorCalls
 );
 

@@ -22,14 +22,12 @@ employeeRouter.post("/createEmployee", validation(EV.createEmployeeValidation), 
 employeeRouter.get(
   "/profile",
   auth(Object.values(systemRoles)),
-  validation(EV.getProfileValidation),
   EC.getProfile
 );
 
 employeeRouter.get(
   "/getDoctors",
   auth(Object.values(systemRoles)),
-  validation(EV.getDoctorsValidation),
   EC.getDoctors
 );
 

@@ -52,7 +52,7 @@ const employeeModel = sequelize.define("Employee", {
   secure_url: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: "../../image/waghed.jpg", // Set default path if desired
+    defaultValue: "https://res.cloudinary.com/dpq8atnxn/image/upload/v1730498228/waghed_d4pxmc.jpg", // Set default path if desired
   },
   public_id: {
     type: DataTypes.STRING,

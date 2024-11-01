@@ -49,6 +49,16 @@ const employeeModel = sequelize.define("Employee", {
     allowNull: false,
     defaultValue: "false",
   },
+  secure_url: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "../../image/waghed.jpg", // Set default path if desired
+  },
+  public_id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "default-avatar",
+  },
 });
 
 export default employeeModel;

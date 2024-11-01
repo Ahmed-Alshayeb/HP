@@ -4,14 +4,14 @@ import employeeModel from "../../../DB/models/employee.model.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 import { sendEmail } from "../../services/sendmail.service.js";
 import AppError from "../../utils/AppError.js";
+import cloudinary from "../../services/cloudinary.service.js";
 
 // @desc    get all employees
 // @route   GET /api/v1/employee
 // @access  Public
 export const getEmployees = asyncHandler(async (req, res, next) => {
   const employees = await employeeModel.findAll();
-  res.status(200).json({ msg: "success", employees });  
-  
+  res.status(200).json({ msg: "success", employees });
 });
 
 // @desc    create employee
@@ -31,6 +31,18 @@ export const createEmployee = asyncHandler(async (req, res, next) => {
   const token = jwt.sign({ email }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
+
+  // upload image
+  let secure_url, public_id;
+
+  if (req.file) {
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "employee",
+    });
+    secure_url = result.secure_url;
+    public_id = result.public_id;
+  }
+
   const link = `${req.protocol}://${req.get("host")}/api/v1/employee/verify/${token}`;
   await sendEmail(email, "Verification Email", link);
 
@@ -43,10 +55,12 @@ export const createEmployee = asyncHandler(async (req, res, next) => {
     gender,
     birthdate,
     status,
+    secure_url,
+    public_id,
     role,
   });
 
-  res.status(200).json({ msg: "success", employee });
+  res.status(201).json({ msg: "success", employee });
 });
 
 // @desc    verify email
@@ -109,7 +123,7 @@ export const updateEmployee = asyncHandler(async (req, res, next) => {
   }
   const employee = await employeeModel.update(
     { name, email, phone, address, gender, birthdate, status },
-    { where: { id: req.employee.id } },
+    { where: { id: req.employee.id } }
   );
 
   res.status(200).json({ msg: "success", employee });

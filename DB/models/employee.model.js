@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../connection.js";
 
 import { systemRoles } from "../../src/utils/systemRoles.js";
+import { defaultURL } from "../../src/utils/defaultURL.js";
 
 const employeeModel = sequelize.define("Employee", {
   name: {
@@ -52,7 +53,7 @@ const employeeModel = sequelize.define("Employee", {
   secure_url: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: "https://res.cloudinary.com/dpq8atnxn/image/upload/v1730498228/waghed_d4pxmc.jpg", // Set default path if desired
+    defaultValue: defaultURL, // Set default path if desired
   },
   public_id: {
     type: DataTypes.STRING,

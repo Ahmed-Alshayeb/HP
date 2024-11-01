@@ -5,6 +5,7 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 import { sendEmail } from "../../services/sendmail.service.js";
 import AppError from "../../utils/AppError.js";
 import cloudinary from "../../services/cloudinary.service.js";
+import { defaultURL } from "../../utils/defaultURL.js";
 
 // @desc    get all employees
 // @route   GET /api/v1/employee
@@ -41,6 +42,15 @@ export const createEmployee = asyncHandler(async (req, res, next) => {
     });
     secure_url = result.secure_url;
     public_id = result.public_id;
+  } else {
+    const result = await cloudinary.uploader.upload(
+      defaultURL,
+      {
+        folder: `Hospital/Employee/${email}`,
+      }
+    );
+    secure_url = defaultURL;
+    public_id = "Default-image";
   }
 
   const link = `${req.protocol}://${req.get("host")}/api/v1/employee/verify/${token}`;

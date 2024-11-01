@@ -136,8 +136,6 @@ export const updateEmployee = asyncHandler(async (req, res, next) => {
       folder: `Hospital/Employee/${req.employee.email}`,
     });
 
-    console.log("ssssssssssssssssss");
-
     const newEmployee = await employeeModel.update(
       { name, email, phone, address, gender, birthdate, status, secure_url: result.secure_url, public_id: result.public_id },
       { where: { id: req.employee.id } }

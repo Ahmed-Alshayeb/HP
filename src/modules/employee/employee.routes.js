@@ -32,6 +32,7 @@ employeeRouter.get("/getDoctors", auth(Object.values(systemRoles)), EC.getDoctor
 employeeRouter.patch(
   "/",
   auth(Object.values(systemRoles)),
+  multerHost(validExtension.image).single("avatar"),
   validation(EV.updateEmployeeValidation),
   EC.updateEmployee
 );

@@ -43,12 +43,9 @@ export const createEmployee = asyncHandler(async (req, res, next) => {
     secure_url = result.secure_url;
     public_id = result.public_id;
   } else {
-    const result = await cloudinary.uploader.upload(
-      defaultURL,
-      {
-        folder: `Hospital/Employee/${email}`,
-      }
-    );
+    const result = await cloudinary.uploader.upload(defaultURL, {
+      folder: `Hospital/Employee/${email}`,
+    });
     secure_url = defaultURL;
     public_id = "Default-image";
   }
@@ -131,10 +128,26 @@ export const updateEmployee = asyncHandler(async (req, res, next) => {
     const employee = await employeeModel.findOne({ where: { email } });
     if (employee) return next(new AppError("email already exists", 400));
   }
-  const employee = await employeeModel.update(
+
+  // update employee image
+  if (req.file) {
+    await cloudinary.uploader.destroy(req.employee.public_id);
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: `Hospital/Employee/${req.employee.email}`,
+    });
+
+    console.log("ssssssssssssssssss");
+
+    const newEmployee = await employeeModel.update(
+      { name, email, phone, address, gender, birthdate, status, secure_url: result.secure_url, public_id: result.public_id },
+      { where: { id: req.employee.id } }
+    );
+  }
+
+  const newEmployee = await employeeModel.update(
     { name, email, phone, address, gender, birthdate, status },
     { where: { id: req.employee.id } }
   );
 
-  res.status(200).json({ msg: "success", employee });
+  res.status(200).json({ msg: "success", newEmployee });
 });

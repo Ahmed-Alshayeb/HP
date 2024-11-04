@@ -100,7 +100,7 @@ export const login = asyncHandler(async (req, res, next) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-  res.status(200).json({ msg: "success", token });
+  res.status(200).json({ msg: "success", token, name: employee.name, role: employee.role });
 });
 
 // @desc    get profile
@@ -137,7 +137,17 @@ export const updateEmployee = asyncHandler(async (req, res, next) => {
     });
 
     const newEmployee = await employeeModel.update(
-      { name, email, phone, address, gender, birthdate, status, secure_url: result.secure_url, public_id: result.public_id },
+      {
+        name,
+        email,
+        phone,
+        address,
+        gender,
+        birthdate,
+        status,
+        secure_url: result.secure_url,
+        public_id: result.public_id,
+      },
       { where: { id: req.employee.id } }
     );
   }

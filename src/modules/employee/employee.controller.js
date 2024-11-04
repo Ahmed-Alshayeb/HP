@@ -100,7 +100,9 @@ export const login = asyncHandler(async (req, res, next) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-  res.status(200).json({ msg: "success", token, name: employee.name, role: employee.role });
+  res
+    .status(200)
+    .json({ msg: "success", token, name: employee.name, role: employee.role, image: employee.secure_url });
 });
 
 // @desc    get profile

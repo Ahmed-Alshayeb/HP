@@ -100,6 +100,7 @@ export const login = asyncHandler(async (req, res, next) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
+  // 5555
   res.status(200).json({ msg: "success", token, employee });
 });
 

@@ -14,6 +14,7 @@ export const initApp = async (express, app) => {
   app.use("/api/v1/employee", routes.employeeRouter);
   app.use("/api/v1/patient", routes.patientRouter);
   app.use("/api/v1/call", routes.callRouter);
+  app.use("/api/v1/prescription", routes.prescriptionRouter);
 
   app.get("/", (req, res) => {
     res.send("Hello World!");

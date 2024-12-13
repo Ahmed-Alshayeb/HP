@@ -26,7 +26,12 @@ export const initApp = async (express, app) => {
 
   // Globel Error Handling
   app.use((err, req, res, next) => {
-    res.status(err.code || 400).json({ msg: "erro", error: err.message });
+    res.status(err.statusCode).json({
+      status: err.status,
+      error: err,
+      message: err.message,
+      stack: err.stack,
+    });
   });
 
   app.listen(port, () => {

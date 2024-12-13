@@ -1,6 +1,9 @@
 import { Sequelize } from "sequelize";
 import mysql2 from "mysql2";
 
+import dotEnv from "dotenv";
+dotEnv.config();
+
 export const sequelize = new Sequelize(process.env.DATABASE_URI, {
   dialect: "mysql",
   dialectModule: mysql2,

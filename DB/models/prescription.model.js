@@ -1,39 +1,50 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../connection.js";
 
-const prescriptionModel = sequelize.define("Prescription", {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  doctor: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: "Employee",
-      key: "id",
+const prescriptionModel = sequelize.define(
+  "Prescription",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    doctor: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Employees",
+        key: "id",
+      },
+    },
+    patient: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Patients",
+        key: "id",
+      },
+    },
+    age: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    medicines: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
   },
-  patient: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: "Patient",
-      key: "id",
-    },
-  },
-  age: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  midicines: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 export default prescriptionModel;

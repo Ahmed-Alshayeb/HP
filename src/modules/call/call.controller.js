@@ -1,5 +1,6 @@
 import callModel from "../../../DB/models/call.model.js";
 import employeeModel from "../../../DB/models/employee.model.js";
+import patientModel from "../../../DB/models/patient.model.js";
 import AppError from "../../utils/AppError.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 
@@ -25,7 +26,7 @@ export const getCall = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/call/createCall
 // @access  Private
 export const createCall = asyncHandler(async (req, res, next) => {
-  const { name, age, phone, doctor, cDescription } = req.body;
+  const { name, age, phone, doctor, cDescription, gender, address } = req.body;
 
   const checkDoctor = await employeeModel.findOne({ where: { id: doctor, role: "Doctor" } });
   if (!checkDoctor) return next(new AppError("doctor not found", 404));
@@ -36,6 +37,15 @@ export const createCall = asyncHandler(async (req, res, next) => {
     phone,
     doctor,
     cDescription,
+  });
+
+  await patientModel.create({
+    name,
+    phone,
+    address,
+    gender,
+    age,
+    disease: cDescription,
   });
 
   res.status(201).json({ msg: "success", call });

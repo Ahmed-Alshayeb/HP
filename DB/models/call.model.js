@@ -7,6 +7,7 @@ const callModel = sequelize.define("Call", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  
   age: {
     type: DataTypes.STRING,
     allowNull: false,

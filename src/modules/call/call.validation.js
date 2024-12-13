@@ -9,6 +9,8 @@ export const createCallValidation = {
     phone: generalFiled.phone.required(),
     doctor: joi.number().required(),
     cDescription: joi.string().required(),
+    gender: joi.string().valid("male", "female").required(),
+    address: joi.string().required(),
   }),
 };
 

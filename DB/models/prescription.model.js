@@ -38,7 +38,7 @@ const prescriptionModel = sequelize.define(
       allowNull: false,
     },
     medicines: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

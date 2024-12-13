@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import employeeModel from "../../../DB/models/employee.model.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
-import { sendEmail } from "../../services/sendmail.service.js";
+// import { sendEmail } from "../../services/sendmail.service.js";
 import AppError from "../../utils/AppError.js";
 import cloudinary from "../../services/cloudinary.service.js";
 import { defaultURL } from "../../utils/defaultURL.js";
@@ -49,9 +49,6 @@ export const createEmployee = asyncHandler(async (req, res, next) => {
     secure_url = defaultURL;
     public_id = "Default-image";
   }
-
-  const link = `${req.protocol}://${req.get("host")}/api/v1/employee/verify/${token}`;
-  await sendEmail(email, "Verification Email", link);
 
   const employee = await employeeModel.create({
     name,

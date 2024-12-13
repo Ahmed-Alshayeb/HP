@@ -2,17 +2,14 @@ import { Sequelize } from "sequelize";
 import mysql2 from "mysql2";
 
 export const sequelize = new Sequelize({
-  host: "bs1xtjqlwenxhebtxbtx-mysql.services.clever-cloud.com",
+  host: "bpwb62evoeytpvjsquzk-mysql.services.clever-cloud.com",
   port: 3306,
-  username: "urthuiwezbvrseob",
-  password: "idqqcGwzVqLVxVlwpLSk",
-  database: "bs1xtjqlwenxhebtxbtx",
+  username: "bpwb62evoeytpvjsquzk",
+  password: "a8bUs7nTz5dLBdgdJv9t",
+  database: "bpwb62evoeytpvjsquzk",
   dialect: "mysql",
   dialectModule: mysql2,
-  
 });
-
-
 
 const connectionDB = async () => {
   await sequelize

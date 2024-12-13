@@ -1,12 +1,7 @@
 import { Sequelize } from "sequelize";
 import mysql2 from "mysql2";
 
-export const sequelize = new Sequelize({
-  host: "bpwb62evoeytpvjsquzk-mysql.services.clever-cloud.com",
-  port: 3306,
-  username: "bpwb62evoeytpvjsquzk",
-  password: "a8bUs7nTz5dLBdgdJv9t",
-  database: "bpwb62evoeytpvjsquzk",
+export const sequelize = new Sequelize(process.env.DATABASE_URI, {
   dialect: "mysql",
   dialectModule: mysql2,
 });

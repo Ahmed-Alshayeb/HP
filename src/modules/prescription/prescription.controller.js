@@ -16,6 +16,7 @@ export const getPrescriptions = asyncHandler(async (req, res) => {
 // @access  Private
 export const getPrescription = asyncHandler(async (req, res) => {
   const prescriptions = await prescriptionModel.findOne({ where: { id: req.params.id } });
+  if (!prescriptions) return next(new AppError("prescription not found", 404));
   res.status(200).json({ msg: "success", count: prescriptions.length, prescriptions });
 });
 
